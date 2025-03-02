@@ -6,6 +6,20 @@ struct ActivityView: View {
     var body: some View {
         NavigationView { // ✅ Works in iOS 14, 15, 16+
             VStack {
+                 
+                                Text("Welcome, User!")
+                                    .font(.headline)
+
+                                Button("Save Health Data") {
+                                  
+                                }
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                            }
+                        }
+                        
                 Text("Today's Activity")
                     .font(.title)
                     .bold()
@@ -47,10 +61,8 @@ struct ActivityView: View {
                 }
                 .padding()
             }
-            .onAppear {
-                healthManager.requestHealthKitAccess()
-            }
-            .navigationTitle("Activity Summary") // ✅ Adds title in the navigation bar
+           
+
         }
-    }
-}
+    
+
