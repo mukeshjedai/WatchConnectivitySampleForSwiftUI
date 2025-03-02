@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  WatchConnectivitySampleForSwiftUI WatchKit Extension
-//
-//  Created by Takuya Aso on 2020/12/10.
-//
-
 import SwiftUI
 import HealthKit
 
@@ -14,6 +7,7 @@ struct ContentView: View {
     
     var viewModel = AnimalListViewModel()
     let healthStore = HKHealthStore() // HealthKit instance
+    @State private var timer: Timer? // ✅ Timer for interval-based sending
 
     var body: some View {
         List(0 ..< animals.count) { index in
@@ -33,9 +27,28 @@ struct ContentView: View {
         .onAppear {
             requestHealthKitAuthorization()
             startLiveHeartRateMonitoring() // ✅ Start Live HR Monitoring
+            startSendingDataAtIntervals()  // ✅ Start Timer
+        }
+        .onDisappear {
+            stopSendingData() // ✅ Stop Timer to save resources
         }
     }
     
+    // ✅ Start Timer to Send Data Every Second
+    private func startSendingDataAtIntervals() {
+        stopSendingData() // Ensure no duplicate timers
+
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.sendLiveHealthData()
+        }
+    }
+
+    // ✅ Stop Timer When Not Needed
+    private func stopSendingData() {
+        timer?.invalidate()
+        timer = nil
+    }
+
     private func sendMessage(index: Int) {
         let messages: [String: Any] =
             ["animal": animals[index],
