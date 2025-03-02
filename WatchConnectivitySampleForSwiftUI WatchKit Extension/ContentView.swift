@@ -6,21 +6,19 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct ContentView: View {
     let animals = ["ネコ", "イヌ", "ハムスター", "ドラゴン", "ユニコーン"]
     let emojiAnimals = ["🐱", "🐶", "🐹", "🐲", "🦄"]
     
     var viewModel = AnimalListViewModel()
-    
+    let healthStore = HKHealthStore() // HealthKit instance
+
     var body: some View {
         List(0 ..< animals.count) { index in
             Button {
-                // タップ時の処理
-                // [String: Any] はこっち
-                // self.sendMessage(index: index)
-                // Data型はこっち
-                self.sendMessageData(index: index)
+                self.sendLiveHealthData()
             } label: {
                 HStack {
                     Text(self.emojiAnimals[index])
@@ -32,6 +30,10 @@ struct ContentView: View {
         }
         .listStyle(CarouselListStyle())
         .navigationBarTitle(Text("Animal List"))
+        .onAppear {
+            requestHealthKitAuthorization()
+            startLiveHeartRateMonitoring() // ✅ Start Live HR Monitoring
+        }
     }
     
     private func sendMessage(index: Int) {
@@ -43,14 +45,101 @@ struct ContentView: View {
         }
     }
     
-    private func sendMessageData(index: Int) {
-        let animal = AnimalModel(name: animals[index], emoji: emojiAnimals[index])
-        guard let data = try? JSONEncoder().encode(animal) else {
-            return
+    // ✅ Convert Heart Rate Samples to R-R Intervals
+    private func computeRRIntervals(from samples: [HKQuantitySample]) -> [Double] {
+        var rrIntervals: [Double] = []
+
+        for i in 1..<samples.count {
+            let timeDiff = samples[i].startDate.timeIntervalSince(samples[i-1].startDate)
+            let heartRate = samples[i].quantity.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute()))
+            let rr = 60.0 / heartRate // Convert BPM to RR interval in seconds
+            if timeDiff < 2.0 { // Ignore large gaps in data
+                rrIntervals.append(rr * 1000) // Convert to milliseconds
+            }
         }
-        self.viewModel.session.sendMessageData(data, replyHandler: nil) { (error) in
-            print(error.localizedDescription)
+
+        return rrIntervals
+    }
+
+    // ✅ Calculate RMSSD from RR Intervals (FIXED)
+    private func calculateRMSSD(rrIntervals: [Double]) -> Double {
+        guard rrIntervals.count > 1 else { return 0 }
+        var squaredDiffs: [Double] = []
+        
+        for i in 1..<rrIntervals.count {
+            let diff = rrIntervals[i] - rrIntervals[i-1]
+            squaredDiffs.append(diff * diff)
         }
+        
+        let meanSquare = squaredDiffs.reduce(0, +) / Double(squaredDiffs.count)
+        return sqrt(meanSquare)
+    }
+
+    private func sendLiveHealthData() {
+        let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate)!
+        let predicate = HKQuery.predicateForSamples(withStart: Date().addingTimeInterval(-300),
+                                                    end: Date(),
+                                                    options: .strictEndDate)
+        
+        let query = HKSampleQuery(sampleType: heartRateType,
+                                  predicate: predicate,
+                                  limit: 10,
+                                  sortDescriptors: [NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)]) { _, samples, error in
+            guard let samples = samples as? [HKQuantitySample], samples.count > 1 else {
+                print("⚠️ No sufficient HR data available.")
+                return
+            }
+
+            let rrIntervals = self.computeRRIntervals(from: samples)
+            let rmssd = self.calculateRMSSD(rrIntervals: rrIntervals) // ✅ Fixed Call
+            
+            print("📤 Sending RMSSD Data: \(rmssd) ms")
+            
+            let healthData: [String: Any] = [
+                "HRV_RMSSD": rmssd
+            ]
+            
+            self.viewModel.session.sendMessage(healthData, replyHandler: nil) { (error) in
+                print("❌ Failed to send RMSSD data: \(error.localizedDescription)")
+            }
+        }
+        
+        healthStore.execute(query)
+    }
+
+    // ✅ Request HealthKit Authorization
+    private func requestHealthKitAuthorization() {
+        let typesToRead: Set = [HKObjectType.quantityType(forIdentifier: .heartRate)!]
+        
+        healthStore.requestAuthorization(toShare: nil, read: typesToRead) { success, error in
+            if success {
+                print("✅ HealthKit authorization granted.")
+            } else {
+                print("❌ HealthKit authorization failed: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
+
+    // ✅ Live Heart Rate Monitoring
+    private func startLiveHeartRateMonitoring() {
+        let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate)!
+
+        let query = HKAnchoredObjectQuery(type: heartRateType,
+                                          predicate: nil,
+                                          anchor: nil,
+                                          limit: HKObjectQueryNoLimit) { query, samples, deletedObjects, newAnchor, error in
+            guard let samples = samples as? [HKQuantitySample] else { return }
+            let latestHeartRate = samples.last?.quantity.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute()))
+            print("❤️ Live Heart Rate: \(latestHeartRate ?? 0) BPM")
+        }
+
+        query.updateHandler = { query, samples, deletedObjects, newAnchor, error in
+            guard let samples = samples as? [HKQuantitySample] else { return }
+            let latestHeartRate = samples.last?.quantity.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute()))
+            print("🔥 Updated Live HR: \(latestHeartRate ?? 0) BPM")
+        }
+
+        healthStore.execute(query)
     }
 }
 

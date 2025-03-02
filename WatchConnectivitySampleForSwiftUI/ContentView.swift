@@ -1,51 +1,61 @@
-//
-//  ContentView.swift
-//  WatchConnectivitySampleForSwiftUI
-//
-//  Created by Takuya Aso on 2020/12/10.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    // @ObservedObject をつけてメッセージ配列の変更通知を受け取る
-    @ObservedObject var viewModel = MessageListViewModel()
-    @State private var isReachable = "NO"
-    
+    @StateObject var viewModel = MessageListViewModel()
+
     var body: some View {
-        NavigationView {
+        VStack {
+            // ✅ Display Latest RMSSD Data
             VStack {
-                HStack {
-                    Button(action: {
-                        // iPhone と Apple Watch が疎通できるか
-                        // true の場合メッセージ送信可能
-                        self.isReachable = self.viewModel.session.isReachable ? "YES": "NO"
-                    }) {
-                        Text("Check")
-                    }
-                    .padding(.leading, 16.0)
-                    Spacer()
-                    Text("isReachable")
-                        .font(.headline)
-                        .padding()
-                    Text(self.isReachable)
-                        .foregroundColor(.gray)
-                        .font(.subheadline)
-                        .padding()
-                }
-                .background(Color.init(.systemGray5))
-                List {
-//                    ForEach(self.viewModel.messages, id: \.self) { animal in
-//                        MessageRow(animal: animal)
-//                    }
-                    ForEach(self.viewModel.messagesData, id: \.self) { animal in
-                        MessageRow(animalModel: animal)
-                    }
-                }
-                .listStyle(PlainListStyle())
-                Spacer()
+                Text("Latest RMSSD (HRV)")
+                    .font(.headline)
+                    .padding()
+
+                Text(viewModel.latestRMSSD)
+                    .font(.title2)
+                    .foregroundColor(.blue)
+                    .bold()
+                    .padding()
             }
-            .navigationTitle("Receiver")
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+            .padding()
+
+            // ✅ Display Stress Level
+            VStack {
+                Text("Stress Level")
+                    .font(.headline)
+                    .padding()
+
+                Text(viewModel.stressLevel)
+                    .font(.title2)
+                    .foregroundColor(.red)
+                    .bold()
+                    .padding()
+            }
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+            .padding()
+
+            // ✅ Display Latest HRV SDNN Data
+            VStack {
+                Text("Latest HRV SDNN")
+                    .font(.headline)
+                    .padding()
+
+                Text(viewModel.latestHRV)
+                    .font(.title2)
+                    .foregroundColor(.green)
+                    .bold()
+                    .padding()
+            }
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+            .padding()
+        }
+        .padding()
+        .onAppear {
+            print("📡 UI is ready. Waiting for RMSSD & HRV SDNN Data...")
         }
     }
 }

@@ -2,17 +2,17 @@
 //  MessageListViewModel.swift
 //  WatchConnectivitySampleForSwiftUI
 //
-//  Created by Takuya Aso on 2020/12/10.
-//
 
 import SwiftUI
 import WatchConnectivity
 
 final class MessageListViewModel: NSObject, ObservableObject {
-    // 配列に変化があれば変更を通知
+    @Published var latestRMSSD: String = "No RMSSD Data"
+    @Published var latestHRV: String = "No HRV Data"
+    @Published var stressLevel: String = "Unknown" // ✅ New: Store stress level
     @Published var messages: [String] = []
     @Published var messagesData: [AnimalModel] = []
-    
+
     var session: WCSession
     
     init(session: WCSession = .default) {
@@ -28,31 +28,42 @@ extension MessageListViewModel: WCSessionDelegate {
         if let error = error {
             print(error.localizedDescription)
         } else {
-            print("The session has completed activation.")
+            print("✅ The session has completed activation.")
         }
     }
-    func sessionDidBecomeInactive(_ session: WCSession) {
-    }
-    func sessionDidDeactivate(_ session: WCSession) {
-    }
-    // メッセージ受信[String: Any]
+
+    func sessionDidBecomeInactive(_ session: WCSession) {}
+    func sessionDidDeactivate(_ session: WCSession) {}
+
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         DispatchQueue.main.async {
-            let receivedAnimal = message["animal"] as? String ?? "UMA"
-            let receivedEmoji = message["emoji"] as? String ?? "❓"
-            print(receivedEmoji + receivedAnimal)  // 🐱ネコ
-            // 受信したメッセージを配列に格納し配列を更新
-            self.messages.append(receivedEmoji + receivedAnimal)
+            print("📥 Received Message:", message)
+
+            if let rmssd = message["HRV_RMSSD"] as? Double {
+                let formattedRMSSD = "RMSSD: \(String(format: "%.2f", rmssd)) ms"
+                print("💓 Received RMSSD Data:", formattedRMSSD)
+                self.latestRMSSD = formattedRMSSD
+
+                // ✅ Calculate Stress Level
+                let stress = self.calculateStressLevel(rmssd: rmssd)
+                self.stressLevel = "Stress Level: \(stress)/100"
+                print("⚠️ Calculated Stress Level:", stress)
+
+                self.objectWillChange.send() // ✅ Ensure UI updates
+            }
+
+            if let hrvSDNN = message["HRV_SDNN"] as? Double {
+                let formattedHRV = "HRV: \(String(format: "%.2f", hrvSDNN)) ms"
+                print("💓 Received HRV SDNN Data:", formattedHRV)
+                self.latestHRV = formattedHRV
+                self.objectWillChange.send() // ✅ Ensure UI updates
+            }
         }
     }
-    
-    // メッセージ受信 Data型
-    func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
-        DispatchQueue.main.async {
-            guard let message = try? JSONDecoder().decode(AnimalModel.self, from: messageData) else {
-                return
-            }
-            self.messagesData.append(message)
-        }
+
+    // ✅ New: Convert RMSSD to Stress Level (0-100)
+    private func calculateStressLevel(rmssd: Double) -> Int {
+        let stressScore = max(0, min(100, 100 - Int(rmssd * 2))) // Normalize RMSSD into stress score
+        return stressScore
     }
 }

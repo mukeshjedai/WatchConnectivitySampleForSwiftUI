@@ -88,6 +88,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9FC9B0382D73CCD400A9590D /* WatchConnectivitySampleForSwiftUI WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchConnectivitySampleForSwiftUI WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		FD72B30125823A2D002D191B /* WatchConnectivitySampleForSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchConnectivitySampleForSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD72B30425823A2D002D191B /* WatchConnectivitySampleForSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivitySampleForSwiftUIApp.swift; sourceTree = "<group>"; };
 		FD72B30625823A2D002D191B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -230,6 +231,7 @@
 		FD72B33625823A2E002D191B /* WatchConnectivitySampleForSwiftUI WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9FC9B0382D73CCD400A9590D /* WatchConnectivitySampleForSwiftUI WatchKit Extension.entitlements */,
 				FD72B33725823A2E002D191B /* WatchConnectivitySampleForSwiftUIApp.swift */,
 				FD72B33925823A2E002D191B /* ContentView.swift */,
 				FD72B374258243AE002D191B /* AnimalListViewModel.swift */,
@@ -624,9 +626,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WatchConnectivitySampleForSwiftUI WatchKit Extension/WatchConnectivitySampleForSwiftUI WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchConnectivitySampleForSwiftUI WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "WatchConnectivitySampleForSwiftUI WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -635,7 +638,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUI.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUI.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -649,9 +652,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WatchConnectivitySampleForSwiftUI WatchKit Extension/WatchConnectivitySampleForSwiftUI WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchConnectivitySampleForSwiftUI WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "WatchConnectivitySampleForSwiftUI WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -660,7 +664,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUI.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUI.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -678,11 +682,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				IBSC_MODULE = WatchConnectivitySampleForSwiftUI_WatchKit_Extension;
 				INFOPLIST_FILE = "WatchConnectivitySampleForSwiftUI WatchKit App/Info.plist";
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUI.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUI.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -699,11 +703,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				IBSC_MODULE = WatchConnectivitySampleForSwiftUI_WatchKit_Extension;
 				INFOPLIST_FILE = "WatchConnectivitySampleForSwiftUI WatchKit App/Info.plist";
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUI.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUI.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -721,7 +725,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchConnectivitySampleForSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WatchConnectivitySampleForSwiftUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -730,7 +734,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -745,7 +749,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchConnectivitySampleForSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WatchConnectivitySampleForSwiftUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -754,7 +758,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -769,7 +773,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				INFOPLIST_FILE = WatchConnectivitySampleForSwiftUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -777,7 +781,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -792,7 +796,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				INFOPLIST_FILE = WatchConnectivitySampleForSwiftUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -800,7 +804,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -815,7 +819,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				INFOPLIST_FILE = WatchConnectivitySampleForSwiftUIUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -823,7 +827,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUIUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUIUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -837,7 +841,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M7ZGYSAKB;
+				DEVELOPMENT_TEAM = LVCRRSCC69;
 				INFOPLIST_FILE = WatchConnectivitySampleForSwiftUIUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -845,7 +849,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.WatchConnectivitySampleForSwiftUIUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshcse.WatchConnectivitySampleForSwiftUIUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
