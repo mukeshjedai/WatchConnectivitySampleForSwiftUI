@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9FC9B03A2D73DD8C00A9590D /* HealthMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9B0392D73DD8C00A9590D /* HealthMonitorView.swift */; };
+		9FC9B03C2D73F0B000A9590D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9B03B2D73F0B000A9590D /* NotificationManager.swift */; };
+		9FC9B03E2D73F26500A9590D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9B03D2D73F26500A9590D /* ActivityView.swift */; };
+		9FC9B0402D73F2CB00A9590D /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9B03F2D73F2CB00A9590D /* HealthManager.swift */; };
 		FD72B30525823A2D002D191B /* WatchConnectivitySampleForSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72B30425823A2D002D191B /* WatchConnectivitySampleForSwiftUIApp.swift */; };
 		FD72B30725823A2D002D191B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72B30625823A2D002D191B /* ContentView.swift */; };
 		FD72B30925823A2E002D191B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD72B30825823A2E002D191B /* Assets.xcassets */; };
@@ -89,6 +93,11 @@
 
 /* Begin PBXFileReference section */
 		9FC9B0382D73CCD400A9590D /* WatchConnectivitySampleForSwiftUI WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchConnectivitySampleForSwiftUI WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		9FC9B0392D73DD8C00A9590D /* HealthMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthMonitorView.swift; sourceTree = "<group>"; };
+		9FC9B03B2D73F0B000A9590D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		9FC9B03D2D73F26500A9590D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		9FC9B03F2D73F2CB00A9590D /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
+		9FC9B0412D73F35700A9590D /* WatchConnectivitySampleForSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchConnectivitySampleForSwiftUI.entitlements; sourceTree = "<group>"; };
 		FD72B30125823A2D002D191B /* WatchConnectivitySampleForSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchConnectivitySampleForSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD72B30425823A2D002D191B /* WatchConnectivitySampleForSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivitySampleForSwiftUIApp.swift; sourceTree = "<group>"; };
 		FD72B30625823A2D002D191B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,6 +189,11 @@
 		FD72B30325823A2D002D191B /* WatchConnectivitySampleForSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				9FC9B0412D73F35700A9590D /* WatchConnectivitySampleForSwiftUI.entitlements */,
+				9FC9B03D2D73F26500A9590D /* ActivityView.swift */,
+				9FC9B03F2D73F2CB00A9590D /* HealthManager.swift */,
+				9FC9B03B2D73F0B000A9590D /* NotificationManager.swift */,
+				9FC9B0392D73DD8C00A9590D /* HealthMonitorView.swift */,
 				FD72B30425823A2D002D191B /* WatchConnectivitySampleForSwiftUIApp.swift */,
 				FD72B30625823A2D002D191B /* ContentView.swift */,
 				FD72B38C258256C5002D191B /* MessageRow.swift */,
@@ -445,11 +459,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD72B3942582571E002D191B /* Date+Extension.swift in Sources */,
+				9FC9B03A2D73DD8C00A9590D /* HealthMonitorView.swift in Sources */,
 				FD72B3A525825E5C002D191B /* AnimalModel.swift in Sources */,
 				FD72B38D258256C5002D191B /* MessageRow.swift in Sources */,
 				FD72B30725823A2D002D191B /* ContentView.swift in Sources */,
+				9FC9B03E2D73F26500A9590D /* ActivityView.swift in Sources */,
 				FD72B30525823A2D002D191B /* WatchConnectivitySampleForSwiftUIApp.swift in Sources */,
+				9FC9B03C2D73F0B000A9590D /* NotificationManager.swift in Sources */,
 				FD72B38125824606002D191B /* MessageListViewModel.swift in Sources */,
+				9FC9B0402D73F2CB00A9590D /* HealthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +741,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WatchConnectivitySampleForSwiftUI/WatchConnectivitySampleForSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchConnectivitySampleForSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = LVCRRSCC69;
@@ -747,6 +766,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WatchConnectivitySampleForSwiftUI/WatchConnectivitySampleForSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchConnectivitySampleForSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = LVCRRSCC69;
